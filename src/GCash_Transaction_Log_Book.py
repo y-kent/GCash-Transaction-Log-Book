@@ -193,14 +193,14 @@ class GCashTrackerApp(tk.Tk):
         self.summary_frame = ttk.LabelFrame(main_frame, text=" Summary Report ", padding=15)
         self.summary_frame.pack(fill='x', pady=(0, 20))
         
-        # Labels for Cash-in, Cash-out, and Net Balance (initialized to 0.00)
-        self.lbl_cash_in = ttk.Label(self.summary_frame, text="Cash-in: Php 0.00", font=('Segoe UI', 12, 'bold'), foreground=self.color_danger)
+        # Labels for Cash-in, Cash-out, and Cash on Hand (initialized to 0.00)
+        self.lbl_cash_in = ttk.Label(self.summary_frame, text="Cash-in: Php 0.00", font=('Segoe UI', 12, 'bold'), foreground=self.color_success)
         self.lbl_cash_in.pack(side='left', padx=20)
         
-        self.lbl_cash_out = ttk.Label(self.summary_frame, text="Cash-out: Php 0.00", font=('Segoe UI', 12, 'bold'), foreground=self.color_success)
+        self.lbl_cash_out = ttk.Label(self.summary_frame, text="Cash-out: Php 0.00", font=('Segoe UI', 12, 'bold'), foreground=self.color_danger)
         self.lbl_cash_out.pack(side='left', padx=20)
         
-        self.lbl_net = ttk.Label(self.summary_frame, text="Net Balance: Php 0.00", font=('Segoe UI', 12, 'bold'))
+        self.lbl_net = ttk.Label(self.summary_frame, text="Cash on Hand: Php 0.00", font=('Segoe UI', 12, 'bold'))
         self.lbl_net.pack(side='right', padx=20)
 
         # --- Input Form ---
@@ -457,12 +457,12 @@ class GCashTrackerApp(tk.Tk):
             self.tree.insert('', 'end', values=(t_id, gcash, full_name, fmt_amount, t_type, ref, date))
             
         # Update Summary
-        net = total_out - total_in
+        total = total_in - total_out
         self.lbl_cash_in.config(text=f"Cash-in: Php {total_in:,.2f}")
         self.lbl_cash_out.config(text=f"Cash-out: Php {total_out:,.2f}")
 
-        # Apply color formatting to Net Balance
-        self.lbl_net.config(text=f"Cash on Hand: Php {net:,.2f}", foreground=self.color_success if net >= 0 else self.color_danger)
+        # Apply color formatting to Cash on Hand
+        self.lbl_net.config(text=f"Cash on Hand: Php {total:,.2f}", foreground=self.color_success if total >= 0 else self.color_danger)
 
 if __name__ == "__main__":
     app = GCashTrackerApp()
