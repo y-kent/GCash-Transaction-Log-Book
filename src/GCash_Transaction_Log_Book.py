@@ -148,7 +148,7 @@ class DatabaseManager:
 
 # --- Part 2: GUI Application (Tkinter) ---
 
-class GCashTrackerApp(tk.Tk):
+class GCashTransactionLogBook(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("IT211 Final Project: GCash Transaction Log Book")
@@ -465,5 +465,6 @@ class GCashTrackerApp(tk.Tk):
         self.lbl_net.config(text=f"Cash on Hand: Php {total:,.2f}", foreground=self.color_success if total >= 0 else self.color_danger)
 
 if __name__ == "__main__":
-    app = GCashTrackerApp()
+    app = GCashTransactionLogBook()
     app.mainloop()
+
